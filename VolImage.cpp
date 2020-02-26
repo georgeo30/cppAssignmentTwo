@@ -20,11 +20,12 @@ bool VolImage::readImages(std::string baseName)
 {
     string baseNameUrl = "./" + baseName + "/" + baseName + ".data";
     ifstream myfile;
+    //opening the .data file and going through it
     myfile.open(baseNameUrl, ios::out | ios::app | ios::binary);
     string line;
     vector<int> whn;
     int slicesNo;
-
+    //if .data file is open go through and get the width, height and slicesNo
     if (myfile.is_open())
     {
 
@@ -40,12 +41,16 @@ bool VolImage::readImages(std::string baseName)
 
         cout << slicesNo << " " << width << " " << height;
     }
+
     for (int i = 0; i < slicesNo; i++)
     {
-        cout<<i;
+        slices.push_back(new unsigned char*[height]);
+        cout<<slices.back()<<endl;
+         cout<<"+++++++++++++++++++++++++++"<<endl;
     }
-            return 0;
-
+    for (auto& tt:slices){cout<<tt<<endl;}
+        
+    return 0;
 }
 // compute difference map and write out; define in .cpp
 void VolImage::diffmap(int sliceI, int sliceJ, std::string output_prefix) {}
