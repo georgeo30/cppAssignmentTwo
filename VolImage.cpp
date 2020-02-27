@@ -12,10 +12,10 @@ VolImage::VolImage()
 {
     width = 0;
     height = 0;
-} // default constructor - define in .cpp
-VolImage::~VolImage() {} // destructor - define in .cpp file
+} // default constructor
+VolImage::~VolImage() {} // destructor 
 // populate the object with images in stack and
-//set member variables define in .cpp
+//set member variables
 bool VolImage::readImages(std::string baseName)
 {
     string baseNameUrl = "./" + baseName + "/" + baseName + ".data";
@@ -75,18 +75,23 @@ void VolImage::diffmap(int sliceI, int sliceJ, std::string output_prefix)
 {
 
     ofstream outfile;
-    outfile.open("output_prefix.raw");
+    outfile.open(output_prefix+".raw");
 
     for (int j = 0; j < height; j++)
     {
         for (int k = 0; k < width; k++)
         {
-            outfile << (slices[sliceI][j][k] - slices[sliceJ][j][k]);
+            outfile << (unsigned char)(abs((float)slices[sliceI][j][k] - (float)slices[sliceJ][j][k])/2);
         }
+        //outfile<<endl;
     }
 }
 // extract slice sliceId and write to output
-void VolImage::extract(int sliceId, std::string output_prefix) {}
+void VolImage::extract(int sliceId, std::string output_prefix) {
+
+    
+
+}
 // number of bytes uses to store image data bytes
 //and pointers (ignore vector<> container, dims etc)
 int VolImage::volImageSize(void) {} // define in .cpp
