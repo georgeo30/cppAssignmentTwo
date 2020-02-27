@@ -36,7 +36,6 @@ bool VolImage::readImages(std::string baseName)
         ss >> slicesNo;
 
         myfile.close();
-
     }
 
     for (int i = 0; i < slicesNo; i++)
@@ -44,13 +43,13 @@ bool VolImage::readImages(std::string baseName)
         string sliceUrl = "./brain_mri_raws/" + baseName + to_string(i) + ".raw";
         ifstream rawFile;
         rawFile.open(sliceUrl, ios::binary);
-        sum=sum+sizeof(slices[i]);
+        sum = sum + sizeof(slices[i]);
         slices.push_back(new unsigned char *[height]);
         string sliceRow;
 
         for (int j = 0; j < height; j++)
         {
-            sum=sum+sizeof(slices[i][j]);
+            sum = sum + sizeof(slices[i][j]);
             slices[i][j] = new unsigned char[width];
             for (int k = 0; k < width; k++)
             {
@@ -59,7 +58,7 @@ bool VolImage::readImages(std::string baseName)
         }
         rawFile.close();
     }
-    
+
     //     ofstream outfile;
     //    outfile.open("afile.dat");
     //     for(int i=0;i<height;i++){
@@ -106,10 +105,12 @@ void VolImage::extract(int sliceId, std::string output_prefix)
 }
 // number of bytes uses to store image data bytes
 //and pointers (ignore vector<> container, dims etc)
-int VolImage::volImageSize(void) {
-    return (width*height*slicesNo)+sum;
-} 
-int VolImage::getSlices(void){
+int VolImage::volImageSize(void)
+{
+    return (width * height * slicesNo) + sum;
+}
+int VolImage::getSlices(void)
+{
     return slicesNo;
 }
 } // namespace THNGEO002
