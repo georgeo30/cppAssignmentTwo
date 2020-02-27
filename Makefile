@@ -5,7 +5,7 @@ create: volimage.h VolImage.cpp driver.cpp
 	$(CC) $(LIB) driver.o volImage.o -o myprog
 
 run:
-	./myprog
+	./myprog MRI
 
 clean:
 	rm volImage.o
