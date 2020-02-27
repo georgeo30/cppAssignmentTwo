@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
     }
     else if (argc == 2)
     {
+                v.readImages(argv[1]);
 
         int bytes = v.volImageSize();
         int sizeOfSlices = v.getSlices();
