@@ -18,7 +18,7 @@ VolImage::~VolImage() {} // destructor
 //set member variables
 bool VolImage::readImages(std::string baseName)
 {
-    string baseNameUrl = "./" + baseName + "/" + baseName + ".data";
+    string baseNameUrl = "./brain_mri_raws/" + baseName + ".data";
     ifstream myfile;
     //opening the .data file and going through it
     myfile.open(baseNameUrl, ios::out | ios::app | ios::binary);
@@ -37,12 +37,11 @@ bool VolImage::readImages(std::string baseName)
 
         myfile.close();
 
-        cout << slicesNo << " " << width << " " << height << endl;
     }
 
     for (int i = 0; i < slicesNo; i++)
     {
-        string sliceUrl = "./" + baseName + "/" + baseName + to_string(i) + ".raw";
+        string sliceUrl = "./brain_mri_raws/" + baseName + to_string(i) + ".raw";
         ifstream rawFile;
         rawFile.open(sliceUrl, ios::binary);
         sum=sum+sizeof(slices[i]);
