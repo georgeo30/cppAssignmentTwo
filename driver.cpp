@@ -8,12 +8,10 @@ int main(int argc, char *argv[])
     THNGEO002::VolImage v;
 
     string baseName;
-    if(argv[1]=="--help"){
-        cout<<"Usage: ./volimage [options] [target]"<<endl<<"Example: "<<endl<<"Extract: ./volimage imagebase -d i j output_file_name"<<endl; 
-    }
-    else if (argc == 2)
+
+    if (argc == 2)
     {
-                v.readImages(argv[1]);
+        v.readImages(argv[1]);
 
         int bytes = v.volImageSize();
         int sizeOfSlices = v.getSlices();
@@ -31,10 +29,10 @@ int main(int argc, char *argv[])
         v.readImages(argv[1]);
         v.extract(atoi(argv[3]), argv[4]);
     }
-    
 
-    else{
-        cout<<"You have entered a invalid input. Please try again"<<endl;
+    else
+    {
+        cout << "You have entered a invalid input. Please try again" << endl;
     }
     //v.diffmap(1,2,"outputDiffmap");
     //v.extract(1,"outputExtract");
