@@ -23,7 +23,6 @@ bool VolImage::readImages(std::string baseName)
     //opening the .data file and going through it
     myfile.open(baseNameUrl, ios::out | ios::app | ios::binary);
     string line;
-    vector<int> whn;
     int slicesNo;
     //if .data file is open go through and get the width, height and slicesNo
     if (myfile.is_open())
@@ -39,17 +38,36 @@ bool VolImage::readImages(std::string baseName)
 
         myfile.close();
 
-        cout << slicesNo << " " << width << " " << height;
+        cout << slicesNo << " " << width << " " << height<<endl;
     }
 
     for (int i = 0; i < slicesNo; i++)
     {
-        slices.push_back(new unsigned char*[height]);
-        cout<<slices.back()<<endl;
-         cout<<"+++++++++++++++++++++++++++"<<endl;
+        string sliceUrl = "./" + baseName + "/" + baseName +to_string(i)+".raw";
+        ifstream rawFile;
+        rawFile.open(sliceUrl, ios::binary);
+
+        slices.push_back(new unsigned char *[height + 1]);
+         string sliceRow;
+         
+        for (int j = 0; j < height; j++)
+        {
+           
+            slices[i][j] = new unsigned char[width + 1];
+            for (int k = 0; k < width; k++)
+            {
+                slices[i][j][k]=rawFile.get();
+            }
+        }
+       rawFile.close();
     }
-    for (auto& tt:slices){cout<<tt<<endl;}
-        
+//     ofstream outfile;
+//    outfile.open("afile.dat");
+//     for(int i=0;i<height;i++){
+//         for(int j=0;j<width;j++){
+//             outfile<<slices[0][i][j];
+//         }
+//     }
     return 0;
 }
 // compute difference map and write out; define in .cpp
