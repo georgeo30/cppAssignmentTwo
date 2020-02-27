@@ -11,7 +11,7 @@ namespace THNGEO002
 class VolImage
 {
 private:                                  // private members
-    int width, height,slicesNo;                    // width and height of image stack
+    int width, height;                    // width and height of image stack
     std::vector<unsigned char **> slices; // data for each slice, in order
 public:                                   // public members
     VolImage();                           // default constructor - define in .cpp
