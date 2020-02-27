@@ -11,4 +11,4 @@ clean:
 	rm volImage.o
 	rm driver.o
 	rm volimage.h.gch
-	rm myprog
+	rm volimage
