@@ -13,7 +13,7 @@ VolImage::VolImage()
     width = 0;
     height = 0;
 } // default constructor
-VolImage::~VolImage() {} // destructor 
+VolImage::~VolImage() {} // destructor
 // populate the object with images in stack and
 //set member variables
 bool VolImage::readImages(std::string baseName)
@@ -23,7 +23,6 @@ bool VolImage::readImages(std::string baseName)
     //opening the .data file and going through it
     myfile.open(baseNameUrl, ios::out | ios::app | ios::binary);
     string line;
-    int slicesNo;
     //if .data file is open go through and get the width, height and slicesNo
     if (myfile.is_open())
     {
@@ -46,13 +45,13 @@ bool VolImage::readImages(std::string baseName)
         string sliceUrl = "./" + baseName + "/" + baseName + to_string(i) + ".raw";
         ifstream rawFile;
         rawFile.open(sliceUrl, ios::binary);
-
+        sum=sum+sizeof(slices[i]);
         slices.push_back(new unsigned char *[height + 1]);
         string sliceRow;
 
         for (int j = 0; j < height; j++)
         {
-
+            sum=sum+sizeof(slices[i][j]);
             slices[i][j] = new unsigned char[width + 1];
             for (int k = 0; k < width; k++)
             {
@@ -61,6 +60,7 @@ bool VolImage::readImages(std::string baseName)
         }
         rawFile.close();
     }
+    
     //     ofstream outfile;
     //    outfile.open("afile.dat");
     //     for(int i=0;i<height;i++){
@@ -75,24 +75,42 @@ void VolImage::diffmap(int sliceI, int sliceJ, std::string output_prefix)
 {
 
     ofstream outfile;
-    outfile.open(output_prefix+".raw");
+    outfile.open(output_prefix + ".raw");
 
     for (int j = 0; j < height; j++)
     {
         for (int k = 0; k < width; k++)
         {
-            outfile << (unsigned char)(abs((float)slices[sliceI][j][k] - (float)slices[sliceJ][j][k])/2);
+            outfile << (unsigned char)(abs((float)slices[sliceI][j][k] - (float)slices[sliceJ][j][k]) / 2);
+        }
+        //outfile<<endl;
+    }
+    outfile.close();
+}
+// extract slice sliceId and write to output
+void VolImage::extract(int sliceId, std::string output_prefix)
+{
+    ofstream outfile;
+    outfile.open(output_prefix + ".data");
+
+    outfile << to_string(width) + " " + to_string(height) + " 1";
+    outfile.close();
+    outfile.open(output_prefix + ".raw");
+    for (int j = 0; j < height; j++)
+    {
+        for (int k = 0; k < width; k++)
+        {
+            outfile << slices[sliceId][j][k];
         }
         //outfile<<endl;
     }
 }
-// extract slice sliceId and write to output
-void VolImage::extract(int sliceId, std::string output_prefix) {
-
-    
-
-}
 // number of bytes uses to store image data bytes
 //and pointers (ignore vector<> container, dims etc)
-int VolImage::volImageSize(void) {} // define in .cpp
+int VolImage::volImageSize(void) {
+    return (width*height*slicesNo)+sum;
+} 
+int VolImage::getSlices(void){
+    return slicesNo;
+}
 } // namespace THNGEO002
