@@ -2,10 +2,10 @@ CC=g++
 LIB=-std=c++11
 create: volimage.h VolImage.cpp driver.cpp
 	$(CC) $(LIB) volimage.h VolImage.cpp driver.cpp -c
-	$(CC) $(LIB) driver.o volImage.o -o myprog
+	$(CC) $(LIB) driver.o volImage.o -o volimage
 
 run:
-	./myprog MRI
+	./volimage MRI
 
 clean:
 	rm volImage.o
