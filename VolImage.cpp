@@ -13,7 +13,18 @@ VolImage::VolImage()
     width = 0;
     height = 0;
 } // default constructor
-VolImage::~VolImage() {} // destructor
+VolImage::~VolImage()
+{
+    for (int i = 0; i < slicesNo; i++)
+    {
+        for (int j = 0; j < height; j++)
+        {
+            delete slices[i][j];
+        }
+        delete slices[i];
+    }
+
+} // destructor
 // populate the object with images in stack and
 //set member variables
 bool VolImage::readImages(std::string baseName)
