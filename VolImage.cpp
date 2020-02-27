@@ -45,13 +45,13 @@ bool VolImage::readImages(std::string baseName)
         ifstream rawFile;
         rawFile.open(sliceUrl, ios::binary);
         sum=sum+sizeof(slices[i]);
-        slices.push_back(new unsigned char *[height + 1]);
+        slices.push_back(new unsigned char *[height]);
         string sliceRow;
 
         for (int j = 0; j < height; j++)
         {
             sum=sum+sizeof(slices[i][j]);
-            slices[i][j] = new unsigned char[width + 1];
+            slices[i][j] = new unsigned char[width];
             for (int k = 0; k < width; k++)
             {
                 slices[i][j][k] = rawFile.get();
