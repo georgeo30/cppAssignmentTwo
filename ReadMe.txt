@@ -30,6 +30,14 @@ To Run the program through terminal.
 
 ---------------------------------------------------
 
+File structure
+
+driver.cpp : contains the main method which is used to take in the command line input and process accordingly.
+VolImage.cpp : class file as declared in the header to handle diffMap, extract and default informaation.
+volimage.h : header file for the class VolImage.cpp
+
+
+---------------------------------------------------
 
 Git Details:
 
