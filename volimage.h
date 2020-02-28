@@ -1,3 +1,5 @@
+#ifndef _VOLIMAGE_H
+#define _VOLIMAGE_H
 #include <string>
 #include <iostream>
 #include <vector>
@@ -32,3 +34,4 @@ public:                                   // public members
 };
 
 } // namespace THNGEO002
+#endif
