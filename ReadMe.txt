@@ -13,7 +13,7 @@ make clean : this will remove all .o files and the executable
 
 To Run the program through terminal.
 
-1)Assuming you have already types in "make" and compiled the files
+1)Assuming you have already typed in "make" and compiled the files
 
 2) you can then test by typing in as specified in the pdf
 
@@ -23,6 +23,9 @@ To Run the program through terminal.
             3) to use the extract method type -> ./volimage MRI -x 100 output
 
     **  Please remember to preceed the name of the executable with "./" as shown above  **
+
+    ** Please also note that the default path is brain_mri_raws/basename **
+    ** you have to change it in the code if you want to change the path to your basename **
 
 
 ---------------------------------------------------
